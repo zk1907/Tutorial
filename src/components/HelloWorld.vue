@@ -8,7 +8,7 @@
 // import _ from 'lodash';
 import CryptoJS from "crypto-js";
 import { inject, onMounted } from "vue";
-import axiosApi from '@/src/assets/resource/axios.js'
+import axiosApi from '../resource/interface'
 export default {
     name: 'HelloWorld',
     props: {
@@ -50,8 +50,7 @@ export default {
 
     },
     created(){
-      // this.debclick = _.debounce(this.click,500);
-      // this.initDate();
+      this.initAxios();
     },
     methods:{
       initDate(){
@@ -63,6 +62,11 @@ export default {
           let testStr = CryptoJS.enc.Hex.stringify(test);
           console.log('原字符串',str)
           console.log('签名加密后字符串',testStr)
+      },
+      initAxios(){
+          axiosApi.getEchar().then(result=>{
+              console.log(result);
+          })
       }
     }
 }

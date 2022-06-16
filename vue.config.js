@@ -24,5 +24,19 @@ module.exports = defineConfig({
           .set('@', resolve('src'))
           .set('assets', resolve('src/assets'))
           .set('utils', resolve('src/utils'));
-      }
+      },
+      devServer: {
+        open: true,
+        port: 8001,
+        proxy: {
+            '/apis': {
+                target: 'https://api.github.com',  // target host
+                ws: true,  // proxy websockets 
+                changeOrigin: true,  // needed for virtual hosted sites
+                pathRewrite: {
+                    '^/apis': ''  // rewrite path
+                }
+            },
+        }
+    }
 })
